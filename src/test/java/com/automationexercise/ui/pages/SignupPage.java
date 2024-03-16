@@ -70,12 +70,6 @@ public class SignupPage {
                 .waitUntilClickable()
                 .type(user.getPhoneNumber());
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
         basePage.find(CREATE_ACCOUNT_BUTTON)
                 .waitUntilVisible()
                 .waitUntilClickable()
