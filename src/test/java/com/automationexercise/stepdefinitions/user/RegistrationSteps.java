@@ -18,8 +18,8 @@ public class RegistrationSteps {
     @Steps
     private SignupPage signupPage;
 
-    @Given("A new user is registered")
-    public void newUserIsRegistered() {
+    @Given("A new user registers")
+    public void newUserRegisters() {
         Countries country = Countries.values()[new Random().nextInt(Countries.values().length)];
         DataGenerator dataGenerator = new DataGenerator(new Locale(country.getLocaleCode()));
         User randomUser = dataGenerator.getRandomUser(country);
