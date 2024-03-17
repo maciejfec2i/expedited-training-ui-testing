@@ -23,7 +23,7 @@ public class DataGenerator {
     }
 
     private String getEmailFromName(Name name) {
-        return String.format("%s.%s@fakemail.com", name.getFirstName(), name.getLastName());
+        return String.format("%s.%s@fakemail.com", name.getFirstName().toLowerCase(), name.getLastName().toLowerCase());
     }
 
     public User getRandomUser(Countries country) {
