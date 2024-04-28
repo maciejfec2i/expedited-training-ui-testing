@@ -2,11 +2,11 @@ package com.expeditedtraining.uitesting.utils.urls;
 
 public enum Pages {
 
-    TABLES(BaseURLs.THE_INTERNET, "/tables");
+    TABLES(BaseURLs.THE_INTERNET.getUrl(), "/tables");
 
     private final String pageUrl;
 
-    Pages(BaseURLs baseURL, String pageEndpoint) {
+    Pages(String baseURL, String pageEndpoint) {
         this.pageUrl = baseURL + pageEndpoint;
     }
 
