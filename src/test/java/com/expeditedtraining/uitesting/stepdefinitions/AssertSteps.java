@@ -1,0 +1,39 @@
+package com.expeditedtraining.uitesting.stepdefinitions;
+
+import com.expeditedtraining.uitesting.utils.SerenitySessionVariableKeys;
+import com.expeditedtraining.uitesting.utils.comparators.MonetaryValueComparator;
+import io.cucumber.java.en.Then;
+import net.serenitybdd.core.Serenity;
+import net.serenitybdd.screenplay.actors.OnStage;
+import net.serenitybdd.screenplay.ensure.Ensure;
+
+import java.util.Collections;
+import java.util.List;
+
+public class AssertSteps {
+
+    private final MonetaryValueComparator monetaryValueComparator = new MonetaryValueComparator();
+
+    @Then("the rows should be sorted correctly by {string} in {string} order")
+    public void rowsShouldBeSortedCorrectly(String by, String order) {
+        List<String> tableValuesSortedViaUI = Serenity.sessionVariableCalled(SerenitySessionVariableKeys.TABLE_VALUES_AFTER_SORT);
+
+        /*
+         * The text of these is retrieved unsorted. We sort them using Java and compare against the values retrieved
+         * after sorting using UI to verify table sorting works.
+         */
+        List<String> tableValuesSortedViaJava = Serenity.sessionVariableCalled(SerenitySessionVariableKeys.TABLE_VALUES_BEFORE_SORT);
+
+        if (by.equalsIgnoreCase("due")) {
+            tableValuesSortedViaJava.sort(monetaryValueComparator);
+        } else {
+            Collections.sort(tableValuesSortedViaJava);
+        }
+
+        if(order.equalsIgnoreCase("descending")) Collections.reverse(tableValuesSortedViaJava);
+
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                Ensure.that(tableValuesSortedViaUI).containsExactlyElementsFrom(tableValuesSortedViaJava)
+        );
+    }
+}
