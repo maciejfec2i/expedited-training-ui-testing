@@ -7,11 +7,9 @@ import net.serenitybdd.screenplay.Actor;
 public class ArrangeSteps {
 
     @Given("the {user} is on the {string} page")
-    public void userIsOnTheInitialPage(Actor user, String pageName) throws InterruptedException {
+    public void userIsOnTheInitialPage(Actor user, String pageName) {
         user.attemptsTo(
                 OpenBrowser.on(pageName)
         );
-
-        Thread.sleep(5000);
     }
 }
