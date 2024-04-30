@@ -2,7 +2,8 @@ package com.expeditedtraining.uitesting.utils.urls;
 
 public enum Pages {
 
-    TABLES(BaseURLs.THE_INTERNET.getUrl(), "/tables");
+    TABLES(BaseURLs.THE_INTERNET.getUrl(), "/tables"),
+    JAVASCRIPT_ALERTS(BaseURLs.THE_INTERNET.getUrl(), "/javascript_alerts");
 
     private final String pageUrl;
 
