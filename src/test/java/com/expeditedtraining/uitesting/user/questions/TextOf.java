@@ -1,9 +1,11 @@
-package com.expeditedtraining.uitesting.user.actions.ui;
+package com.expeditedtraining.uitesting.user.questions;
 
 import com.expeditedtraining.uitesting.ui.compontents.Table;
 import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
+import net.serenitybdd.screenplay.questions.Text;
+import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 
 import java.util.List;
@@ -22,5 +24,14 @@ public class TextOf {
                     .findAll(Table.VALUES_UNDER_COLUMN_WITH_INDEX.of(String.valueOf(tableHeaders.indexOf(columnName) + 1)))
                     .textContents();
         };
+    }
+
+    public static Question<String> target(Target target) {
+        return Question.about("Text of " + target).answeredBy(
+                actor -> {
+                    WaitUntil.the(target, WebElementStateMatchers.isVisible());
+                    return BrowseTheWeb.as(actor).find(target).getText();
+                }
+        );
     }
 }

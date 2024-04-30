@@ -1,5 +1,7 @@
 package com.expeditedtraining.uitesting.stepdefinitions;
 
+import com.expeditedtraining.uitesting.ui.pages.JavaScripAlertsPage;
+import com.expeditedtraining.uitesting.user.questions.TextOf;
 import com.expeditedtraining.uitesting.utils.SerenitySessionVariableKeys;
 import com.expeditedtraining.uitesting.utils.comparators.MonetaryValueComparator;
 import io.cucumber.java.en.Then;
@@ -34,6 +36,13 @@ public class AssertSteps {
 
         OnStage.theActorInTheSpotlight().attemptsTo(
                 Ensure.that(tableValuesSortedViaUI).containsExactlyElementsFrom(tableValuesSortedViaJava)
+        );
+    }
+
+    @Then("the page should display that {string}")
+    public void pageShouldDisplayExpectedText(String expectedText) {
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                Ensure.that(TextOf.target(JavaScripAlertsPage.ALERT_ACTION_RESULT)).isEqualTo(expectedText)
         );
     }
 }
