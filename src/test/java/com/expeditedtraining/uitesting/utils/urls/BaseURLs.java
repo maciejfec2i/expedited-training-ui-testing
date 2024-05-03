@@ -2,7 +2,8 @@ package com.expeditedtraining.uitesting.utils.urls;
 
 public enum BaseURLs {
 
-    THE_INTERNET("https://the-internet.herokuapp.com");
+    THE_INTERNET("https://the-internet.herokuapp.com"),
+    TEST_PAGES("https://testpages.eviltester.com");
 
     private final String url;
 
