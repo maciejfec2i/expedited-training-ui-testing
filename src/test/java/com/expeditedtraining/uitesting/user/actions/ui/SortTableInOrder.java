@@ -23,8 +23,6 @@ public class SortTableInOrder implements Performable, IsHidden {
                                 ClickOn.the(Table.COLUMN_HEADER.of(this.by)) :
                                 DoubleClickOn.the(Table.COLUMN_HEADER.of(this.by));
 
-        actor.attemptsTo(
-                sortTable
-        );
+        actor.attemptsTo(sortTable);
     }
 }
