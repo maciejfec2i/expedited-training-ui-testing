@@ -1,8 +1,10 @@
 package com.expeditedtraining.uitesting.stepdefinitions;
 
+import com.expeditedtraining.uitesting.ui.compontents.DraggableDiv;
 import com.expeditedtraining.uitesting.ui.compontents.HTML;
 import com.expeditedtraining.uitesting.ui.pages.JavaScripAlertsPage;
 import com.expeditedtraining.uitesting.user.actions.ui.SwitchTo;
+import com.expeditedtraining.uitesting.user.questions.IDAttribute;
 import com.expeditedtraining.uitesting.user.questions.NumberOf;
 import com.expeditedtraining.uitesting.user.questions.TextOf;
 import com.expeditedtraining.uitesting.utils.SerenitySessionVariableKeys;
@@ -16,6 +18,7 @@ import net.serenitybdd.screenplay.ensure.web.ElementLocated;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class AssertSteps {
 
@@ -64,5 +67,15 @@ public class AssertSteps {
                 SwitchTo.aNewWindow(),
                 Ensure.that(ElementLocated.by((HTML.ELEMENT_WITH_TAG.of("html")))).isDisplayed()
         );
+    }
+
+    @Then("the elements should be as follows")
+    public void elementsShouldBeAsFollows(List<Map<String, String>> detailsOfElements) {
+        for(Map<String, String> expectedElementDetails : detailsOfElements) {
+            OnStage.theActorInTheSpotlight().attemptsTo(
+                    Ensure.that(IDAttribute.of(DraggableDiv.WITH_TEXT.of(expectedElementDetails.get("element-name"))))
+                            .isEqualTo(expectedElementDetails.get("element-column"))
+            );
+        }
     }
 }
