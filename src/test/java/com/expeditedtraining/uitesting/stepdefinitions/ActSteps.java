@@ -1,5 +1,7 @@
 package com.expeditedtraining.uitesting.stepdefinitions;
 
+import com.expeditedtraining.uitesting.ui.compontents.DraggableDiv;
+import com.expeditedtraining.uitesting.user.actions.ui.DragAndDrop;
 import com.expeditedtraining.uitesting.user.actions.ui.SortTable;
 import com.expeditedtraining.uitesting.user.actions.ui.base.ClickOn;
 import com.expeditedtraining.uitesting.user.questions.TextOf;
@@ -8,6 +10,7 @@ import io.cucumber.java.en.When;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
+import net.serenitybdd.screenplay.actions.Drag;
 import net.serenitybdd.screenplay.ui.Link;
 
 public class ActSteps {
@@ -40,6 +43,15 @@ public class ActSteps {
     public void userOpensLink(Actor user, String linkText) {
         user.attemptsTo(
                 ClickOn.the(Link.withText(linkText))
+        );
+    }
+
+    @When("{user} drag(s) and drop(s) element {string} over element {string}")
+    public void userDragsAndDropsElementOverAnotherElement(Actor user, String firstElementText, String secondElementText) {
+        user.attemptsTo(
+                DragAndDrop
+                        .element(DraggableDiv.WITH_TEXT.of(firstElementText))
+                        .on(DraggableDiv.WITH_TEXT.of(secondElementText))
         );
     }
 }
