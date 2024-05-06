@@ -61,9 +61,9 @@ public class AssertSteps {
         );
     }
 
-    @Then("the {user} should be able to switch to the tab and see the page content")
-    public void userShouldBeAbleToSwitchToTabAndSeePageContent(Actor user) {
-        user.attemptsTo(
+    @Then("the {actor} should be able to switch to the tab and see the page content")
+    public void userShouldBeAbleToSwitchToTabAndSeePageContent(Actor actor) {
+        actor.attemptsTo(
                 SwitchTo.aNewWindow(),
                 Ensure.that(ElementLocated.by((HTML.ELEMENT_WITH_TAG.of("html")))).isDisplayed()
         );
