@@ -3,7 +3,7 @@ Feature: When dealing with JS Alerts And Prompts
 
   @JSAlertsTest1
   Scenario Outline: the correct response should be displayed based on how the alert was handled
-    Given the user is on the "JavaScript Alerts" page
+    Given the user is on the JavaScript Alerts page
     And they have triggered a "<prompt-type>"
     When they perform a <prompt-action>
     Then the page should display that "<expected-result>"

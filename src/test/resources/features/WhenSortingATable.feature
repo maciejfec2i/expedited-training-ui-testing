@@ -3,7 +3,7 @@ Feature: When sorting a table
 
   @TablesDemo1
   Scenario Outline: the rows should be sorted correctly based on sorting order and specified column
-    Given the user is on the "Tables" page
+    Given the user is on the Tables page
     When they sort the table by "<column>" in "<order>" order
     Then the rows should be sorted correctly by "<column>" in "<order>" order
 
