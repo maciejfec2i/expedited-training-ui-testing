@@ -1,5 +1,8 @@
 package com.expeditedtraining.uitesting.stepdefinitions;
 
+import com.expeditedtraining.uitesting.user.Credentials;
+import com.expeditedtraining.uitesting.utils.SerenitySessionVariableKeys;
+import com.expeditedtraining.uitesting.utils.urls.Pages;
 import io.cucumber.java.ParameterType;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -16,8 +19,21 @@ import java.util.List;
 public class ParameterDefinitions {
 
     @ParameterType(".*")
-    public Actor user(String userType) {
-        return OnStage.theActorCalled(userType);
+    public Actor actor(String userType) {
+        Actor actor = OnStage.theActorCalled(userType);
+
+        try {
+            Credentials credentials = Credentials.valueOf(userType.toUpperCase().replace(" ", "_"));
+            actor.remember(SerenitySessionVariableKeys.USER_CREDENTIALS, credentials);
+        }
+        catch (Exception ignored) {}
+
+        return actor;
+    }
+
+    @ParameterType(".*")
+    public Pages page(String pageName) {
+        return Pages.valueOf(pageName.toUpperCase().replace(" ", "_"));
     }
 
     @ParameterType(".*")
@@ -50,5 +66,10 @@ public class ParameterDefinitions {
         return Task.where(
                 performableActions.toArray(new Performable[0])
         );
+    }
+
+    @ParameterType(".*")
+    public List<String> itemNames(String itemNames) {
+        return List.of(itemNames.split(", "));
     }
 }

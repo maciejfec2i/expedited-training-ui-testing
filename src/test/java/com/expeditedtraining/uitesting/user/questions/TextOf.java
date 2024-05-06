@@ -1,5 +1,6 @@
 package com.expeditedtraining.uitesting.user.questions;
 
+import com.expeditedtraining.uitesting.ui.compontents.ItemCard;
 import com.expeditedtraining.uitesting.ui.compontents.Table;
 import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;

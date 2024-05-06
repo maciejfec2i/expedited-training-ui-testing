@@ -4,6 +4,7 @@ import com.expeditedtraining.uitesting.ui.compontents.DraggableDiv;
 import com.expeditedtraining.uitesting.ui.compontents.HTML;
 import com.expeditedtraining.uitesting.ui.pages.JavaScripAlertsPage;
 import com.expeditedtraining.uitesting.user.actions.ui.SwitchTo;
+import com.expeditedtraining.uitesting.user.questions.Cart;
 import com.expeditedtraining.uitesting.user.questions.IDAttribute;
 import com.expeditedtraining.uitesting.user.questions.NumberOf;
 import com.expeditedtraining.uitesting.user.questions.TextOf;
@@ -61,9 +62,9 @@ public class AssertSteps {
         );
     }
 
-    @Then("the {user} should be able to switch to the tab and see the page content")
-    public void userShouldBeAbleToSwitchToTabAndSeePageContent(Actor user) {
-        user.attemptsTo(
+    @Then("the {actor} should be able to switch to the tab and see the page content")
+    public void userShouldBeAbleToSwitchToTabAndSeePageContent(Actor actor) {
+        actor.attemptsTo(
                 SwitchTo.aNewWindow(),
                 Ensure.that(ElementLocated.by((HTML.ELEMENT_WITH_TAG.of("html")))).isDisplayed()
         );
@@ -77,5 +78,13 @@ public class AssertSteps {
                             .isEqualTo(expectedElementDetails.get("element-column"))
             );
         }
+    }
+
+    @Then("the following items should no longer be in the cart: {itemNames}")
+    public void followingItemsShouldNoLongerBeInTheCart(List<String> removedItems) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        List<String> cartItems = actor.asksFor(Cart.items());
+
+        actor.attemptsTo(Ensure.that(cartItems).doesNotContainElementsFrom(removedItems));
     }
 }
