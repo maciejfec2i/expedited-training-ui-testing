@@ -67,4 +67,9 @@ public class ParameterDefinitions {
                 performableActions.toArray(new Performable[0])
         );
     }
+
+    @ParameterType(".*")
+    public List<String> itemNames(String itemNames) {
+        return List.of(itemNames.split(", "));
+    }
 }

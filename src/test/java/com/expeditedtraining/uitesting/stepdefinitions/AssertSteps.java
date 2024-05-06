@@ -4,6 +4,7 @@ import com.expeditedtraining.uitesting.ui.compontents.DraggableDiv;
 import com.expeditedtraining.uitesting.ui.compontents.HTML;
 import com.expeditedtraining.uitesting.ui.pages.JavaScripAlertsPage;
 import com.expeditedtraining.uitesting.user.actions.ui.SwitchTo;
+import com.expeditedtraining.uitesting.user.questions.Cart;
 import com.expeditedtraining.uitesting.user.questions.IDAttribute;
 import com.expeditedtraining.uitesting.user.questions.NumberOf;
 import com.expeditedtraining.uitesting.user.questions.TextOf;
@@ -77,5 +78,13 @@ public class AssertSteps {
                             .isEqualTo(expectedElementDetails.get("element-column"))
             );
         }
+    }
+
+    @Then("the following items should no longer be in the cart: {itemNames}")
+    public void followingItemsShouldNoLongerBeInTheCart(List<String> removedItems) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        List<String> cartItems = actor.asksFor(Cart.items());
+
+        actor.attemptsTo(Ensure.that(cartItems).doesNotContainElementsFrom(removedItems));
     }
 }

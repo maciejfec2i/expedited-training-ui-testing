@@ -2,6 +2,7 @@ package com.expeditedtraining.uitesting.stepdefinitions;
 
 import com.expeditedtraining.uitesting.ui.compontents.DraggableDiv;
 import com.expeditedtraining.uitesting.user.actions.ui.DragAndDrop;
+import com.expeditedtraining.uitesting.user.actions.ui.RemoveCartItems;
 import com.expeditedtraining.uitesting.user.actions.ui.SortTable;
 import com.expeditedtraining.uitesting.user.actions.ui.base.ClickOn;
 import com.expeditedtraining.uitesting.user.questions.TextOf;
@@ -11,6 +12,8 @@ import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.ui.Link;
+
+import java.util.List;
 
 public class ActSteps {
 
@@ -52,5 +55,10 @@ public class ActSteps {
                         .element(DraggableDiv.WITH_TEXT.of(firstElementText))
                         .on(DraggableDiv.WITH_TEXT.of(secondElementText))
         );
+    }
+
+    @When("{actor} remove(s) the following items from the cart: {itemNames}")
+    public void userRemovesTheFollowingItemsFromCart(Actor actor, List<String> itemNames) {
+        actor.attemptsTo(RemoveCartItems.called(itemNames));
     }
 }
