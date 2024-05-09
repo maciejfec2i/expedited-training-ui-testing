@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ArrangeSteps {
 
-    @Given("the {actor} is on the {page} page")
+    @Given("(the ){actor} is/are on the {page} page")
     public void userIsOnTheInitialPage(Actor actor, Pages page) {
         actor.attemptsTo(OpenBrowser.on(page));
     }
@@ -34,10 +34,5 @@ public class ArrangeSteps {
                 OpenBrowser.on(Pages.SWAG_LABS_INVENTORY),
                 UseCartAPI.toAddItems(itemNames)
         );
-    }
-
-    @Given("{actor} is/are on the {page} page")
-    public void userIsOnThePage(Actor actor, Pages page) {
-        actor.attemptsTo(OpenBrowser.on(page));
     }
 }
