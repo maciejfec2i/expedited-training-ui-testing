@@ -8,7 +8,8 @@ public enum Pages {
     DRAG_AND_DROP(BaseURLs.THE_INTERNET.getUrl(), "/drag_and_drop"),
     SWAG_LABS_LOGIN(BaseURLs.SWAG_LABS.getUrl(), "/"),
     SWAG_LABS_INVENTORY(BaseURLs.SWAG_LABS.getUrl(), "/inventory.html"),
-    SWAG_LABS_CART(BaseURLs.SWAG_LABS.getUrl(), "/cart.html");
+    SWAG_LABS_CART(BaseURLs.SWAG_LABS.getUrl(), "/cart.html"),
+    TINYMCE(BaseURLs.THE_INTERNET.getUrl(), "/tinymce");
 
     private final String pageUrl;
 

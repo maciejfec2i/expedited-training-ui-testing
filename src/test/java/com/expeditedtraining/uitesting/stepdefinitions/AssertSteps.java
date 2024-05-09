@@ -3,20 +3,22 @@ package com.expeditedtraining.uitesting.stepdefinitions;
 import com.expeditedtraining.uitesting.ui.compontents.DraggableDiv;
 import com.expeditedtraining.uitesting.ui.compontents.HTML;
 import com.expeditedtraining.uitesting.ui.pages.JavaScripAlertsPage;
+import com.expeditedtraining.uitesting.ui.pages.TinyMCETextEditorPage;
 import com.expeditedtraining.uitesting.user.actions.ui.SwitchTo;
-import com.expeditedtraining.uitesting.user.questions.Cart;
-import com.expeditedtraining.uitesting.user.questions.IDAttribute;
-import com.expeditedtraining.uitesting.user.questions.NumberOf;
-import com.expeditedtraining.uitesting.user.questions.TextOf;
+import com.expeditedtraining.uitesting.user.actions.ui.base.ClickOn;
+import com.expeditedtraining.uitesting.user.questions.*;
 import com.expeditedtraining.uitesting.utils.SerenitySessionVariableKeys;
 import com.expeditedtraining.uitesting.utils.comparators.MonetaryValueComparator;
 import io.cucumber.java.en.Then;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Performable;
+import net.serenitybdd.screenplay.actions.Switch;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.ensure.web.ElementLocated;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -86,5 +88,19 @@ public class AssertSteps {
         List<String> cartItems = actor.asksFor(Cart.items());
 
         actor.attemptsTo(Ensure.that(cartItems).doesNotContainElementsFrom(removedItems));
+    }
+
+    @Then("the toolbar should reflect the correct format for each inputted content section")
+    public void toolbarShouldReflectTheCorrectFormatForEachInputtedContentSection() throws InterruptedException {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        List<Map<String, String>> textEditorContent = actor.recall(SerenitySessionVariableKeys.TEXT_EDITOR_CONTENT);
+
+        for(Map<String, String> content : textEditorContent) {
+            actor.attemptsTo(
+                    SwitchTo.frame(TinyMCETextEditorPage.RICH_TEXT_AREA_IFRAME),
+                    ClickOn.the(TinyMCETextEditorPage.richTextAreaContentSectionWithTextOf(content.get("text"))),
+                    Switch.toDefaultContext()
+            );
+        }
     }
 }

@@ -1,31 +1,22 @@
 package com.expeditedtraining.uitesting.user.actions.ui.base;
 
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.markers.IsHidden;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
+import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 
-public class ClickOn implements Performable, IsHidden {
+public class ClickOn {
 
-    private Target target;
-
-    public ClickOn(Target target) {
-        this.target = target;
+    public static ClickOnTarget the(Target target) {
+        return Tasks.instrumented(ClickOnTarget.class, target);
     }
 
-    public static ClickOn the(Target target) {
-        return new ClickOn(target);
-    }
-
-    @Override
-    public <T extends Actor> void performAs(T actor) {
-        actor.attemptsTo(
-                WaitUntil.the(this.target, WebElementStateMatchers.isVisible()),
-                WaitUntil.the(this.target, WebElementStateMatchers.isClickable()),
-                Click.on(this.target)
-        );
+    public static ClickOnElement the(WebElementFacade webElement) {
+        return Tasks.instrumented(ClickOnElement.class, webElement);
     }
 }
