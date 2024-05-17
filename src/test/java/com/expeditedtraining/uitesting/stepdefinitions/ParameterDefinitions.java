@@ -1,9 +1,9 @@
 package com.expeditedtraining.uitesting.stepdefinitions;
 
-import com.expeditedtraining.uitesting.user.Credentials;
-import com.expeditedtraining.uitesting.utils.SerenitySessionVariableKeys;
-import com.expeditedtraining.uitesting.utils.urls.Pages;
+import com.expeditedtraining.uitesting.ui.pages.BasePageObject;
+import com.expeditedtraining.uitesting.ui.pages.PageFactory;
 import io.cucumber.java.ParameterType;
+import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -20,20 +20,12 @@ public class ParameterDefinitions {
 
     @ParameterType(".*")
     public Actor actor(String userType) {
-        Actor actor = OnStage.theActorCalled(userType);
-
-        try {
-            Credentials credentials = Credentials.valueOf(userType.toUpperCase().replace(" ", "_"));
-            actor.remember(SerenitySessionVariableKeys.USER_CREDENTIALS, credentials);
-        }
-        catch (Exception ignored) {}
-
-        return actor;
+        return OnStage.theActorCalled(userType);
     }
 
     @ParameterType(".*")
-    public Pages page(String pageName) {
-        return Pages.valueOf(pageName.toUpperCase().replace(" ", "_"));
+    public PageObject page(String pageName) {
+        return PageFactory.from(BasePageObject.class.getPackage()).getPageCalled(pageName);
     }
 
     @ParameterType(".*")
