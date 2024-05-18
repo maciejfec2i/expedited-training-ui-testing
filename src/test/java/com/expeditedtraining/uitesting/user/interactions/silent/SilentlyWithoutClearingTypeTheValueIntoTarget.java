@@ -26,7 +26,7 @@ public class SilentlyWithoutClearingTypeTheValueIntoTarget implements Performabl
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        LOGGER.info("{} attempts to type into the {} the value '{}'", actor.getName(), target, value);
+        LOGGER.info("{} attempts to type the value '{}' into the {}", actor.getName(), value, target);
 
         actor.attemptsTo(
                 WaitUntil.the(target, isVisible()),
