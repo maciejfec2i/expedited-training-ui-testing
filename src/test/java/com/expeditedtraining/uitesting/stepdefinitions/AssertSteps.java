@@ -7,6 +7,10 @@ import com.expeditedtraining.uitesting.ui.pages.theinternet.TinyMCETextEditorPag
 import com.expeditedtraining.uitesting.user.interactions.Click;
 import com.expeditedtraining.uitesting.user.interactions.Switch;
 import com.expeditedtraining.uitesting.user.questions.*;
+import com.expeditedtraining.uitesting.user.questions.Number;
+import com.expeditedtraining.uitesting.user.questions.tinymce.FontAlignment;
+import com.expeditedtraining.uitesting.user.questions.tinymce.FontFormatting;
+import com.expeditedtraining.uitesting.user.questions.tinymce.FontStyle;
 import com.expeditedtraining.uitesting.utils.SerenitySessionVariableKeys;
 import com.expeditedtraining.uitesting.utils.comparators.MonetaryValueComparator;
 import io.cucumber.java.en.Then;
@@ -57,7 +61,7 @@ public class AssertSteps {
     @Then("a new tab should be opened")
     public void newTabShouldBeOpened() {
         OnStage.theActorInTheSpotlight().attemptsTo(
-                Ensure.that(NumberOf.openTabs()).isGreaterThan(1)
+                Ensure.that(Number.ofOpenTabs()).isGreaterThan(1)
         );
     }
 
@@ -88,7 +92,7 @@ public class AssertSteps {
     }
 
     @Then("the toolbar should reflect the correct format for each inputted content section")
-    public void toolbarShouldReflectTheCorrectFormatForEachInputtedContentSection() throws InterruptedException {
+    public void toolbarShouldReflectTheCorrectFormatForEachInputtedContentSection() {
         Actor actor = OnStage.theActorInTheSpotlight();
         List<Map<String, String>> textEditorContent = actor.recall(SerenitySessionVariableKeys.TEXT_EDITOR_CONTENT);
 
@@ -96,8 +100,16 @@ public class AssertSteps {
             actor.attemptsTo(
                     Switch.toFrame(TinyMCETextEditorPage.RICH_TEXT_AREA_IFRAME),
                     Click.on(TinyMCETextEditorPage.richTextAreaContentSectionWithTextOf(content.get("text"))),
-                    Switch.toDefaultContext()
+                    Switch.toDefaultContext(),
+                    Ensure.that(FontStyle.ariaCheckedAttributeFor(content.get("font-style"))).isEqualTo("true"),
+                    Ensure.that(FontAlignment.ariaPressedAttributeFor(content.get("font-alignment"))).isEqualTo("true")
             );
+
+            if(!content.get("font-formatting").equalsIgnoreCase("normal")) {
+                actor.attemptsTo(
+                        Ensure.that(FontFormatting.ariaPressedAttributeFor(content.get("font-formatting"))).isEqualTo("true")
+                );
+            }
         }
     }
 }

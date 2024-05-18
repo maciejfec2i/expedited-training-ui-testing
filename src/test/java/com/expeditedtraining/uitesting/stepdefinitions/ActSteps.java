@@ -1,7 +1,7 @@
 package com.expeditedtraining.uitesting.stepdefinitions;
 
 import com.expeditedtraining.uitesting.ui.compontents.DraggableDiv;
-import com.expeditedtraining.uitesting.user.tasks.tinymce.Input;
+import com.expeditedtraining.uitesting.user.tasks.tinymce.EnterIntoTheTextEditor;
 import com.expeditedtraining.uitesting.user.tasks.swaglabs.cart.RemoveFromCart;
 import com.expeditedtraining.uitesting.user.interactions.Click;
 import com.expeditedtraining.uitesting.user.interactions.DragAndDrop;
@@ -62,10 +62,10 @@ public class ActSteps {
     }
 
     @When("{actor} input(s) the following content into the text editor")
-    public void userInputsTheFollowingContentIntoTextEditor(Actor actor, List<Map<String, String>> content) {
+    public void userInputsTheFollowingContentIntoTextEditor(Actor actor, List<Map<String, String>> requiredContent) {
         actor.attemptsTo(
-                Input.contentIntoTextEditor(content),
-                RememberThat.theValueOf(SerenitySessionVariableKeys.TEXT_EDITOR_CONTENT).is(content)
+                EnterIntoTheTextEditor.the(requiredContent),
+                RememberThat.theValueOf(SerenitySessionVariableKeys.TEXT_EDITOR_CONTENT).is(requiredContent)
         );
     }
 }
