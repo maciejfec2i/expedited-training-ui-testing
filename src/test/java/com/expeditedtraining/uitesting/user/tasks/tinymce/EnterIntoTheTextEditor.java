@@ -2,8 +2,6 @@ package com.expeditedtraining.uitesting.user.tasks.tinymce;
 
 import com.expeditedtraining.uitesting.ui.pages.theinternet.TinyMCETextEditorPage;
 import com.expeditedtraining.uitesting.user.interactions.Switch;
-import com.expeditedtraining.uitesting.user.tasks.tinymce.ApplyTextEditor;
-import com.expeditedtraining.uitesting.user.tasks.tinymce.Resize;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.*;
@@ -11,9 +9,9 @@ import net.serenitybdd.screenplay.actions.*;
 import java.util.List;
 import java.util.Map;
 
-public class Input {
+public class EnterIntoTheTextEditor {
 
-    public static Performable contentIntoTextEditor(List<Map<String, String>> content) {
+    public static Performable the(List<Map<String, String>> requiredContent) {
         return Task.where(
                 "{0} enters content into the text editor with the specified formatting applied",
                 actor -> {
@@ -24,8 +22,8 @@ public class Input {
                             Switch.toDefaultContext()
                     );
 
-                    for(Map<String, String> contentPiece : content) {
-                        boolean isLastContentPiece = content.indexOf(contentPiece) == content.size() - 1;
+                    for(Map<String, String> contentPiece : requiredContent) {
+                        boolean isLastContentPiece = requiredContent.indexOf(contentPiece) == requiredContent.size() - 1;
                         String textToEnter = isLastContentPiece ? contentPiece.get("text") : contentPiece.get("text") + "\n";
 
                         actor.attemptsTo(
