@@ -14,8 +14,8 @@ public class WithoutClearingType {
         this.value = value;
     }
 
-    public static Type theValue(String value) {
-        return new Type(value);
+    public static WithoutClearingType theValue(String value) {
+        return new WithoutClearingType(value);
     }
     public Performable into(Target target) {
         return Task.where(
