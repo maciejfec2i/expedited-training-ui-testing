@@ -1,6 +1,5 @@
 package com.expeditedtraining.uitesting.user.interactions;
 
-import com.expeditedtraining.uitesting.user.interactions.silent.SilentlyTypeTheValueIntoTarget;
 import com.expeditedtraining.uitesting.user.interactions.silent.SilentlyWithoutClearingTypeTheValueIntoTarget;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
