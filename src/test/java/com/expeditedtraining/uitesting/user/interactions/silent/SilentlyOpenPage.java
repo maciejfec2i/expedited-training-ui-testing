@@ -7,6 +7,8 @@ import net.serenitybdd.markers.IsSilent;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.actions.Open;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The purpose of this class is to silently (without reporting) open the browser based on the passed in page object
@@ -20,6 +22,8 @@ import net.serenitybdd.screenplay.actions.Open;
  */
 public class SilentlyOpenPage implements Performable, IsSilent {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(SilentlyOpenPage.class);
+
     private final PageObject targetPage;
 
     public SilentlyOpenPage(PageObject targetPage) {
@@ -28,6 +32,8 @@ public class SilentlyOpenPage implements Performable, IsSilent {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        LOGGER.info("{} attempts to open the browser on {}", actor.getName(), targetPage);
+
         String annotationValue = targetPage.getClass().getAnnotation(DefaultUrl.class).value();
         String targetUrl = Environment.getEnvironmentSpecificConfiguration().getProperty(annotationValue);
 

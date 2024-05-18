@@ -6,6 +6,8 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.actions.HoverOverTarget;
 import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.waits.WaitUntil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
@@ -19,6 +21,8 @@ import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisi
  */
 public class SilentlyHoverOverTarget implements Performable, IsSilent {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(SilentlyHoverOverTarget.class);
+
     private final Target target;
 
     public SilentlyHoverOverTarget(Target target) {
@@ -27,6 +31,8 @@ public class SilentlyHoverOverTarget implements Performable, IsSilent {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        LOGGER.info("{} attempts to hover over the {}", actor.getName(), target);
+
         actor.attemptsTo(
                 WaitUntil.the(target, isVisible()),
                 WaitUntil.the(target, isClickable()),

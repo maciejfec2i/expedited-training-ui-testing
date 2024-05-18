@@ -6,6 +6,8 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.actions.Drag;
 import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.waits.WaitUntil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
@@ -19,6 +21,8 @@ import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisi
  */
 public class SilentlyDragAndDropTargetOnTarget implements Performable, IsSilent {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(SilentlyDragAndDropTargetOnTarget.class);
+
     private final Target draggableTarget;
     private final Target target;
 
@@ -29,6 +33,8 @@ public class SilentlyDragAndDropTargetOnTarget implements Performable, IsSilent 
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        LOGGER.info("{} attempts to drag and drop the {} on the {}", actor.getName(), draggableTarget, target);
+
         actor.attemptsTo(
                 WaitUntil.the(draggableTarget, isVisible()),
                 WaitUntil.the(draggableTarget, isClickable()),
