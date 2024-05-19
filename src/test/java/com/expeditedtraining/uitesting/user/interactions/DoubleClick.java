@@ -29,7 +29,7 @@ public class DoubleClick {
      */
     public static Performable on(Target target) {
         return Task.where(
-                "{0} click(s) on " + target,
+                "{0} double click(s) on " + target,
                 Tasks.instrumented(SilentlyDoubleClickOnTarget.class, target)
         );
     }
