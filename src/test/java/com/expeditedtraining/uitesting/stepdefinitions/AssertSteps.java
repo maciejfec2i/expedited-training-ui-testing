@@ -8,6 +8,7 @@ import com.expeditedtraining.uitesting.user.interactions.Click;
 import com.expeditedtraining.uitesting.user.interactions.Switch;
 import com.expeditedtraining.uitesting.user.questions.*;
 import com.expeditedtraining.uitesting.user.questions.Number;
+import com.expeditedtraining.uitesting.user.questions.Text;
 import com.expeditedtraining.uitesting.user.questions.tinymce.FontAlignment;
 import com.expeditedtraining.uitesting.user.questions.tinymce.FontFormatting;
 import com.expeditedtraining.uitesting.user.questions.tinymce.FontStyle;
@@ -30,13 +31,14 @@ public class AssertSteps {
 
     @Then("the rows should be sorted correctly by {string} in {string} order")
     public void rowsShouldBeSortedCorrectly(String by, String order) {
-        List<String> tableValuesSortedViaUI = Serenity.sessionVariableCalled(SerenitySessionVariableKeys.TABLE_VALUES_AFTER_SORT);
+        Actor actor = OnStage.theActorInTheSpotlight();
 
+        List<String> tableValuesSortedViaUI = actor.recall(SerenitySessionVariableKeys.TABLE_VALUES_AFTER_SORT);
         /*
          * The text of these is retrieved unsorted. We sort them using Java and compare against the values retrieved
          * after sorting using UI to verify table sorting works.
          */
-        List<String> tableValuesSortedViaJava = Serenity.sessionVariableCalled(SerenitySessionVariableKeys.TABLE_VALUES_BEFORE_SORT);
+        List<String> tableValuesSortedViaJava = actor.recall(SerenitySessionVariableKeys.TABLE_VALUES_BEFORE_SORT);
 
         if (by.equalsIgnoreCase("due")) {
             tableValuesSortedViaJava.sort(monetaryValueComparator);
@@ -46,23 +48,20 @@ public class AssertSteps {
 
         if(order.equalsIgnoreCase("descending")) Collections.reverse(tableValuesSortedViaJava);
 
-        OnStage.theActorInTheSpotlight().attemptsTo(
-                Ensure.that(tableValuesSortedViaUI).containsExactlyElementsFrom(tableValuesSortedViaJava)
-        );
+        actor.attemptsTo(Ensure.that(tableValuesSortedViaUI).containsExactlyElementsFrom(tableValuesSortedViaJava));
     }
 
     @Then("the page should display that {string}")
     public void pageShouldDisplayExpectedText(String expectedText) {
         OnStage.theActorInTheSpotlight().attemptsTo(
-                Ensure.that(TextOf.target(JavaScriptAlertsPage.ALERT_ACTION_RESULT)).isEqualTo(expectedText)
+                Ensure.that(Text.of(JavaScriptAlertsPage.ALERT_ACTION_RESULT)).isEqualTo(expectedText)
         );
     }
 
     @Then("a new tab should be opened")
     public void newTabShouldBeOpened() {
-        OnStage.theActorInTheSpotlight().attemptsTo(
-                Ensure.that(Number.ofOpenTabs()).isGreaterThan(1)
-        );
+        Actor actor = OnStage.theActorInTheSpotlight();
+        actor.attemptsTo(Ensure.that(Number.ofOpenTabs()).isGreaterThan(1));
     }
 
     @Then("the {actor} should be able to switch to the tab titled {string}")
@@ -75,8 +74,10 @@ public class AssertSteps {
 
     @Then("the elements should be as follows")
     public void elementsShouldBeAsFollows(List<Map<String, String>> detailsOfElements) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+
         for(Map<String, String> expectedElementDetails : detailsOfElements) {
-            OnStage.theActorInTheSpotlight().attemptsTo(
+            actor.attemptsTo(
                     Ensure.that(IDAttribute.of(DraggableDiv.WITH_TEXT.of(expectedElementDetails.get("element-name"))))
                             .isEqualTo(expectedElementDetails.get("element-column"))
             );
