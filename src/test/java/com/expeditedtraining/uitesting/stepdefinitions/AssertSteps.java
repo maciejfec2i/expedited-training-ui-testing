@@ -9,13 +9,13 @@ import com.expeditedtraining.uitesting.user.interactions.Switch;
 import com.expeditedtraining.uitesting.user.questions.*;
 import com.expeditedtraining.uitesting.user.questions.Number;
 import com.expeditedtraining.uitesting.user.questions.Text;
+import com.expeditedtraining.uitesting.user.questions.swaglabs.Cart;
 import com.expeditedtraining.uitesting.user.questions.tinymce.FontAlignment;
 import com.expeditedtraining.uitesting.user.questions.tinymce.FontFormatting;
 import com.expeditedtraining.uitesting.user.questions.tinymce.FontStyle;
 import com.expeditedtraining.uitesting.utils.SerenitySessionVariableKeys;
 import com.expeditedtraining.uitesting.utils.comparators.MonetaryValueComparator;
 import io.cucumber.java.en.Then;
-import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
@@ -78,7 +78,7 @@ public class AssertSteps {
 
         for(Map<String, String> expectedElementDetails : detailsOfElements) {
             actor.attemptsTo(
-                    Ensure.that(IDAttribute.of(DraggableDiv.WITH_TEXT.of(expectedElementDetails.get("element-name"))))
+                    Ensure.that(Attribute.of(DraggableDiv.WITH_TEXT.of(expectedElementDetails.get("element-name")), "id"))
                             .isEqualTo(expectedElementDetails.get("element-column"))
             );
         }
