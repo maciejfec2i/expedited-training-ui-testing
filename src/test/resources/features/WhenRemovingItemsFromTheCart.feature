@@ -11,4 +11,4 @@ Feature: When removing items from the cart
     Examples:
       | items-to-add                                                                 | items-to-remove                                 |
       | Sauce Labs Backpack, Sauce Labs Onesie, Sauce Labs Bike Light                | Sauce Labs Onesie                               |
-#      | Sauce Labs Bike Light, Sauce Labs Fleece Jacket, Test.allTheThings() T-Shirt | Sauce Labs Bike Light, Sauce Labs Fleece Jacket |
+      | Sauce Labs Bike Light, Sauce Labs Fleece Jacket, Test.allTheThings() T-Shirt | Sauce Labs Bike Light, Sauce Labs Fleece Jacket |
