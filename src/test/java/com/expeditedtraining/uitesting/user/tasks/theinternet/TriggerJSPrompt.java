@@ -5,8 +5,12 @@ import com.expeditedtraining.uitesting.user.interactions.Click;
 import net.serenitybdd.markers.IsHidden;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TriggerJSPrompt implements Performable, IsHidden {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(TriggerJSPrompt.class);
 
     private final String promptType;
 
@@ -20,6 +24,8 @@ public class TriggerJSPrompt implements Performable, IsHidden {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        LOGGER.info("{} attempts to trigger a {}", actor.getName(), promptType);
+
         actor.attemptsTo(Click.on(Button.WITH_TEXT.of("Click for " + this.promptType)));
     }
 }

@@ -32,7 +32,7 @@ public class ApplyTextEditor {
     public static Performable fontFormat(String format) {
         return Task.where(
                 actor -> {
-                    actor.attemptsTo(TurnOff.all(ToolbarItemGroup.FORMATTING));
+                    actor.attemptsTo(TurnOff.allActiveItemsFrom(ToolbarItemGroup.FORMATTING));
 
                     if(!format.equalsIgnoreCase("normal")) {
                         actor.attemptsTo(Click.on(TinyMCETextEditorPage.TEXT_FORMAT_BUTTON.of(format)));
@@ -43,7 +43,7 @@ public class ApplyTextEditor {
 
     public static Performable fontAlignment(String alignment) {
         return Task.where(
-                TurnOff.all(ToolbarItemGroup.ALIGNMENT),
+                TurnOff.allActiveItemsFrom(ToolbarItemGroup.ALIGNMENT),
                 Click.on(TinyMCETextEditorPage.TEXT_ALIGN_BUTTON.of(alignment))
         );
     }
