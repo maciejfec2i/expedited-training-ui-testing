@@ -15,16 +15,16 @@ import net.serenitybdd.screenplay.targets.Target;
  * @author Maciej Fec
  * @version 09/05/2024
  */
-public class Type {
+public class ClearThenType {
 
     private final String value;
 
-    public Type(String value) {
+    public ClearThenType(String value) {
         this.value = value;
     }
 
-    public static Type theValue(String value) {
-        return new Type(value);
+    public static ClearThenType theValue(String value) {
+        return new ClearThenType(value);
     }
 
     /**

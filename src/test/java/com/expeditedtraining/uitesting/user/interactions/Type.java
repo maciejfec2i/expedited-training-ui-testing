@@ -6,16 +6,16 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.targets.Target;
 
-public class WithoutClearingType {
+public class Type {
 
     private final String value;
 
-    public WithoutClearingType(String value) {
+    public Type(String value) {
         this.value = value;
     }
 
-    public static WithoutClearingType theValue(String value) {
-        return new WithoutClearingType(value);
+    public static Type theValue(String value) {
+        return new Type(value);
     }
     public Performable into(Target target) {
         return Task.where(

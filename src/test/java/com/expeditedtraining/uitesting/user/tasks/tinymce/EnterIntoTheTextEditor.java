@@ -3,10 +3,9 @@ package com.expeditedtraining.uitesting.user.tasks.tinymce;
 import com.expeditedtraining.uitesting.ui.pages.theinternet.TinyMCETextEditorPage;
 import com.expeditedtraining.uitesting.user.interactions.Clear;
 import com.expeditedtraining.uitesting.user.interactions.Switch;
-import com.expeditedtraining.uitesting.user.interactions.WithoutClearingType;
+import com.expeditedtraining.uitesting.user.interactions.Type;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.actions.*;
 
 import java.util.List;
 import java.util.Map;
@@ -33,7 +32,7 @@ public class EnterIntoTheTextEditor {
                                 ApplyTextEditor.fontFormat(contentPiece.get("font-formatting")),
                                 ApplyTextEditor.fontAlignment(contentPiece.get("font-alignment")),
                                 Switch.toFrame(TinyMCETextEditorPage.RICH_TEXT_AREA_IFRAME),
-                                WithoutClearingType.theValue(textToEnter).into(TinyMCETextEditorPage.RICH_TEXT_AREA),
+                                Type.theValue(textToEnter).into(TinyMCETextEditorPage.RICH_TEXT_AREA),
                                 Switch.toDefaultContext()
                         );
                     }
