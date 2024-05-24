@@ -21,6 +21,8 @@ import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisi
  */
 public class SilentlyTypeTheValueIntoTarget implements Performable, IsSilent {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(SilentlyTypeTheValueIntoTarget.class);
+
     private final String value;
     private final Target target;
 
@@ -31,6 +33,8 @@ public class SilentlyTypeTheValueIntoTarget implements Performable, IsSilent {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        LOGGER.info("{} attempts to clear the {} then type '{}'", actor.getName(), target, value);
+
         actor.attemptsTo(
                 WaitUntil.the(target, isVisible()),
                 WaitUntil.the(target, isClickable()),

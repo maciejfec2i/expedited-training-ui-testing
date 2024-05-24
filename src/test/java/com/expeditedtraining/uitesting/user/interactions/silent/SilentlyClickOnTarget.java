@@ -6,6 +6,8 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.waits.WaitUntil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 
@@ -18,6 +20,8 @@ import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
  */
 public class SilentlyClickOnTarget implements Performable, IsSilent {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(SilentlyClickOnTarget.class);
+
     private final Target target;
 
     public SilentlyClickOnTarget(Target target) {
@@ -26,6 +30,8 @@ public class SilentlyClickOnTarget implements Performable, IsSilent {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        LOGGER.info("{} attempts to click on the {}", actor.getName(), target);
+
         actor.attemptsTo(
                 WaitUntil.the(target, isVisible()),
                 WaitUntil.the(target, isClickable()),

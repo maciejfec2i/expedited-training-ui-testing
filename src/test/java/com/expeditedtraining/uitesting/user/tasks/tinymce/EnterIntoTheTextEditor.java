@@ -1,7 +1,9 @@
 package com.expeditedtraining.uitesting.user.tasks.tinymce;
 
 import com.expeditedtraining.uitesting.ui.pages.theinternet.TinyMCETextEditorPage;
+import com.expeditedtraining.uitesting.user.interactions.Clear;
 import com.expeditedtraining.uitesting.user.interactions.Switch;
+import com.expeditedtraining.uitesting.user.interactions.WithoutClearingType;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.*;
@@ -18,7 +20,7 @@ public class EnterIntoTheTextEditor {
                     actor.attemptsTo(
                             Resize.textEditor(),
                             Switch.toFrame(TinyMCETextEditorPage.RICH_TEXT_AREA_IFRAME),
-                            Clear.field(TinyMCETextEditorPage.RICH_TEXT_AREA),
+                            Clear.the(TinyMCETextEditorPage.RICH_TEXT_AREA),
                             Switch.toDefaultContext()
                     );
 
@@ -31,7 +33,7 @@ public class EnterIntoTheTextEditor {
                                 ApplyTextEditor.fontFormat(contentPiece.get("font-formatting")),
                                 ApplyTextEditor.fontAlignment(contentPiece.get("font-alignment")),
                                 Switch.toFrame(TinyMCETextEditorPage.RICH_TEXT_AREA_IFRAME),
-                                Enter.keyValues(textToEnter).into(TinyMCETextEditorPage.RICH_TEXT_AREA),
+                                WithoutClearingType.theValue(textToEnter).into(TinyMCETextEditorPage.RICH_TEXT_AREA),
                                 Switch.toDefaultContext()
                         );
                     }

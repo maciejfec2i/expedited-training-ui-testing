@@ -8,10 +8,14 @@ import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Evaluate;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.By;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 
 public class Resize implements Performable {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(Resize.class);
 
     public static Resize textEditor() {
         return Tasks.instrumented(Resize.class);
@@ -19,6 +23,8 @@ public class Resize implements Performable {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        LOGGER.info("{} attempts to resize the text editor", actor.getName());
+
         actor.attemptsTo(
                 WaitUntil.the(TinyMCETextEditorPage.RESIZE_HANDLE, isVisible()),
                 WaitUntil.the(TinyMCETextEditorPage.RESIZE_HANDLE, isClickable()),

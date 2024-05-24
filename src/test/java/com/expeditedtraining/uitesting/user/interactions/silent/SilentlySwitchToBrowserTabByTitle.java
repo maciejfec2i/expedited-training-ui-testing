@@ -6,6 +6,8 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Switch;
 import net.serenitybdd.screenplay.targets.Target;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
  */
 public class SilentlySwitchToBrowserTabByTitle implements Performable, IsSilent {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(SilentlySwitchToBrowserTabByTitle.class);
+
     private final String tabTitle;
 
     public SilentlySwitchToBrowserTabByTitle(String tabTitle) {
@@ -28,6 +32,8 @@ public class SilentlySwitchToBrowserTabByTitle implements Performable, IsSilent 
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        LOGGER.info("{} attempts to switch to the browser tab with title of '{}'", actor.getName(), tabTitle);
+
         Set<String> allTabHandles = BrowseTheWeb.as(actor).getDriver().getWindowHandles();
         String currentTabHandle = BrowseTheWeb.as(actor).getDriver().getWindowHandle();
         Set<String> handlesToCheck = allTabHandles.stream().filter(handle -> !handle.equalsIgnoreCase(currentTabHandle)).collect(Collectors.toSet());
