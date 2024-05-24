@@ -6,9 +6,9 @@ import com.expeditedtraining.uitesting.ui.pages.theinternet.JavaScriptAlertsPage
 import com.expeditedtraining.uitesting.ui.pages.theinternet.TinyMCETextEditorPage;
 import com.expeditedtraining.uitesting.user.interactions.Click;
 import com.expeditedtraining.uitesting.user.interactions.Switch;
-import com.expeditedtraining.uitesting.user.questions.*;
-import com.expeditedtraining.uitesting.user.questions.Number;
-import com.expeditedtraining.uitesting.user.questions.Text;
+import com.expeditedtraining.uitesting.user.questions.common.Number;
+import com.expeditedtraining.uitesting.user.questions.common.Text;
+import com.expeditedtraining.uitesting.user.questions.common.Attribute;
 import com.expeditedtraining.uitesting.user.questions.swaglabs.Cart;
 import com.expeditedtraining.uitesting.user.questions.tinymce.FontAlignment;
 import com.expeditedtraining.uitesting.user.questions.tinymce.FontFormatting;

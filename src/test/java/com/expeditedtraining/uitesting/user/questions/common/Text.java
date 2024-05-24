@@ -1,4 +1,4 @@
-package com.expeditedtraining.uitesting.user.questions;
+package com.expeditedtraining.uitesting.user.questions.common;
 
 import com.expeditedtraining.uitesting.user.questions.base.TextOfTarget;
 import com.expeditedtraining.uitesting.user.questions.theinternet.TextOfAllRowValuesForColumn;
