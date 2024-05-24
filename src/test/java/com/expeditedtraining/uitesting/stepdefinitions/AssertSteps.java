@@ -61,7 +61,7 @@ public class AssertSteps {
     @Then("a new tab should be opened")
     public void newTabShouldBeOpened() {
         Actor actor = OnStage.theActorInTheSpotlight();
-        actor.attemptsTo(Ensure.that(Number.ofOpenTabs()).isGreaterThan(1));
+        actor.attemptsTo(Ensure.that(Number.ofOpenBrowserTabs()).isGreaterThan(1));
     }
 
     @Then("the {actor} should be able to switch to the tab titled {string}")
