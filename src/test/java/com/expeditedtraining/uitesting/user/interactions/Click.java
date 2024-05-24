@@ -8,15 +8,6 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.targets.Target;
 
-/**
- * The purpose of this class is to act as something of a factory for {@link Performable} tasks related to clicking
- * an element located by the strategy of choice.<br><br>
- *
- * New methods can be added as required.
- *
- * @author Maciej Fec
- * @version 09/05/2024
- */
 public class Click {
 
     /**
