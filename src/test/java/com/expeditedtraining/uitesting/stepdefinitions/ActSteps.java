@@ -1,7 +1,7 @@
 package com.expeditedtraining.uitesting.stepdefinitions;
 
 import com.expeditedtraining.uitesting.ui.compontents.DraggableDiv;
-import com.expeditedtraining.uitesting.user.questions.Text;
+import com.expeditedtraining.uitesting.user.questions.common.Text;
 import com.expeditedtraining.uitesting.user.tasks.tinymce.EnterIntoTheTextEditor;
 import com.expeditedtraining.uitesting.user.tasks.swaglabs.cart.RemoveFromCart;
 import com.expeditedtraining.uitesting.user.interactions.Click;

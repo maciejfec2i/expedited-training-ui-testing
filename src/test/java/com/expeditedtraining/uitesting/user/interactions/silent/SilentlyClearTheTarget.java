@@ -11,6 +11,13 @@ import org.slf4j.LoggerFactory;
 
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 
+/**
+ * The purpose of this class is to silently (without reporting) clear the provided {@link Target} instance element of
+ * any text after waiting for the target to be visible and clickable.
+ *
+ * @author Maciej Fec
+ * @version 18/05/2024
+ */
 public class SilentlyClearTheTarget implements Performable, IsSilent {
 
     private final Logger LOGGER = LoggerFactory.getLogger(SilentlyClearTheTarget.class);

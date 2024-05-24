@@ -6,15 +6,6 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
 
-/**
- * The purpose of this class is to act as something of a factory for {@link Performable} tasks related to opening the
- * browser on a specified target.<br><br>
- *
- * New methods can be added as required.
- *
- * @author Maciej Fec
- * @version 08/05/2024
- */
 public class Open {
 
     /**

@@ -7,6 +7,13 @@ import net.serenitybdd.screenplay.targets.Target;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The purpose of this class is to retrieve the text of the provided {@link Target} instance element.
+ * This class is a Serenity BDD {@link Question} for asserting and/or retrieving information.
+ *
+ * @author Maciej Fec
+ * @version 20/05/2024
+ */
 public class TextOfTarget implements Question<String> {
 
     private final Logger LOGGER = LoggerFactory.getLogger(TextOfTarget.class);
