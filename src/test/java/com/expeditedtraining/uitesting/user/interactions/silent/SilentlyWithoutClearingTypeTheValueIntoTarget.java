@@ -12,6 +12,13 @@ import org.slf4j.LoggerFactory;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
+/**
+ * The purpose of this class is to silently (without reporting) enter the provided {@link String} instance value into
+ * the provided {@link Target} instance element without clearing it after waiting for the target to be visible and clickable.
+ *
+ * @author Maciej Fec
+ * @version 09/05/2024
+ */
 public class SilentlyWithoutClearingTypeTheValueIntoTarget implements Performable, IsSilent {
 
     private final Logger LOGGER = LoggerFactory.getLogger(SilentlyWithoutClearingTypeTheValueIntoTarget.class);
