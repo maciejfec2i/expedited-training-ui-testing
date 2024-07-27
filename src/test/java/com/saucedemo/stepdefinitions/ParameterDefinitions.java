@@ -1,6 +1,7 @@
 package com.saucedemo.stepdefinitions;
 
 import com.saucedemo.data.ErrorMessage;
+import com.saucedemo.data.SortOrder;
 import com.saucedemo.ui.pages.BasePageObject;
 import com.saucedemo.ui.pages.factories.PageObjectFactory;
 import io.cucumber.java.ParameterType;
@@ -23,5 +24,10 @@ public class ParameterDefinitions {
     @ParameterType(".*")
     public ErrorMessage error(String errorMessageName) {
         return ErrorMessage.valueOf(errorMessageName.toUpperCase().replace(" ", "_"));
+    }
+
+    @ParameterType(".*")
+    public SortOrder order(String sortOrderName) {
+        return SortOrder.valueOf(sortOrderName.toUpperCase().replace(" ", "_"));
     }
 }
