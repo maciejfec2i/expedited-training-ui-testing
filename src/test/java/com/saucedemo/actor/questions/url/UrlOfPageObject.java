@@ -21,7 +21,7 @@ public class UrlOfPageObject implements Question<String> {
 
     @Override
     public String answeredBy(Actor actor) {
-        LOGGER.info("{} asks for the URL of the '{}'", actor.getName(), pageObject.getClass().getSimpleName());
+        LOGGER.info("{} asks for the URL of the {}", actor.getName(), pageObject);
 
         // Check that target page object has the DefaultUrl annotation
         if(!pageObject.getClass().isAnnotationPresent(DefaultUrl.class)) {
