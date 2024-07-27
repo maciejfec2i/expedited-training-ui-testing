@@ -4,13 +4,14 @@ import com.saucedemo.actor.interactions.Click;
 import com.saucedemo.actor.interactions.Type;
 import com.saucedemo.data.Credentials;
 import com.saucedemo.ui.components.LoginForm;
+import net.serenitybdd.markers.IsHidden;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Tasks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Login implements Performable {
+public class Login implements Performable, IsHidden {
 
     private final Logger LOGGER = LoggerFactory.getLogger(Login.class);
 
@@ -21,7 +22,7 @@ public class Login implements Performable {
     }
 
     public static Login using(Credentials credentials) {
-        return Tasks.instrumented(Login.class);
+        return Tasks.instrumented(Login.class, credentials);
     }
 
     @Override
