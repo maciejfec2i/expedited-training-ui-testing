@@ -1,5 +1,6 @@
 package com.saucedemo.actor.questions.text;
 
+import com.saucedemo.actor.questions.Text;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.targets.Target;
@@ -23,6 +24,6 @@ public class TextOfTarget implements Question<String> {
     public String answeredBy(Actor actor) {
         LOGGER.info("{} asks for the text of the {}", actor.getName(), targetElement);
 
-        return net.serenitybdd.screenplay.questions.Text.of(targetElement).answeredBy(actor);
+        return Text.of(targetElement).answeredBy(actor);
     }
 }
