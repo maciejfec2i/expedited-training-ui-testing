@@ -1,7 +1,7 @@
 @LoginTests
 Feature: When logging into the Swag Labs site
 
-  @LoginTest01
+  @SmokeTest @LoginTest01
   Scenario: a Standard User should be redirected to the Products page
     Given A Standard User was able to open the Swag Labs Login page
     When they attempt to log in to the site
