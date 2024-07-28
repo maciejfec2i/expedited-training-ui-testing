@@ -1,9 +1,9 @@
 Feature: When adding item(s) to the cart
 
   Scenario Outline: the 'Remove' button on the item product card on the 'Products' page should be displayed
-    Given A Standard User is logged in and on the Products page
+    Given A Standard User is logged in and on the Swag Labs Inventory page
     When they add the following item to the cart: <item>
-    Then the Remove button should be displayed for the following item: <item>
+    Then the Remove button should be displayed for the following items: <item>
 
     Examples:
       | item                     |
@@ -12,7 +12,7 @@ Feature: When adding item(s) to the cart
       | Sauce Labs Onesie        |
 
   Scenario Outline: the cart badge should display the correct number of items
-    Given A Standard User is logged in and on the Products page
+    Given A Standard User is logged in and on the Swag Labs Inventory page
     When they add the following items to the cart: <items>
     Then the cart badge should display that the cart contains <expected-num-of-items> items
 
@@ -23,7 +23,7 @@ Feature: When adding item(s) to the cart
       | Sauce Labs Backpack, Sauce Labs Onesie, Sauce Labs Bike Light, Sauce Labs Fleece Jacket | 4                     |
 
   Scenario Outline: the items should be displayed in the cart
-    Given A Standard User is logged in and on the Products page
+    Given A Standard User is logged in and on the Swag Labs Inventory page
     When they add the following items to the cart: <items>
     Then the items should be displayed on the Your Cart page
 
