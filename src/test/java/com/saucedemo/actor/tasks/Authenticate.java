@@ -25,7 +25,7 @@ public class Authenticate implements Performable {
     }
 
     @Override
-    @Step("{0} authenticates using the backend")
+    @Step("{0} authenticates using #credentials")
     public <T extends Actor> void performAs(T actor) {
         LOGGER.info("{} attempts to authenticate using {}", actor.getName(), credentials);
 
