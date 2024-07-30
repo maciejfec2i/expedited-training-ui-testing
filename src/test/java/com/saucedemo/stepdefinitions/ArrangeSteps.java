@@ -9,8 +9,11 @@ import com.saucedemo.ui.pages.SwagLabsLoginPage;
 import io.cucumber.java.en.Given;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.RememberThat;
 
 import java.util.List;
+
+import static com.saucedemo.data.MemoryKeys.ITEMS_ADDED_TO_CART;
 
 public class ArrangeSteps {
 
@@ -75,7 +78,8 @@ public class ArrangeSteps {
         actor.attemptsTo(
                 Open.the(swagLabsLoginPage),
                 Authenticate.using(credentials),
-                InsertInToTheCart.theFollowing(items)
+                InsertInToTheCart.theFollowing(items),
+                RememberThat.theValueOf(ITEMS_ADDED_TO_CART).is(items)
         );
     }
 }
