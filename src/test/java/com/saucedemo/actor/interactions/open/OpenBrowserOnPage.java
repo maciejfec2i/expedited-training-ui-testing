@@ -6,6 +6,7 @@ import net.serenitybdd.markers.IsHidden;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.actions.Open;
+import net.serenitybdd.screenplay.conditions.Check;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,10 +22,11 @@ public class OpenBrowserOnPage implements Performable, IsHidden {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        String pageUrl = actor.asksFor(Url.of(targetPage));
+        String currentPageUrl = actor.asksFor(Url.ofTheCurrentlyOpenPage());
+        String targetPageUrl = actor.asksFor(Url.of(targetPage));
 
-        LOGGER.info("{} attempts to open the browser on {}", actor.getName(), pageUrl);
+        LOGGER.info("{} attempts to open the browser on {}", actor.getName(), targetPageUrl);
 
-        actor.attemptsTo(Open.url(pageUrl));
+        actor.attemptsTo(Check.whether(!currentPageUrl.equals(targetPageUrl)).andIfSo(Open.url(targetPageUrl)));
     }
 }
