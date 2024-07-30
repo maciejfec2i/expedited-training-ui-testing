@@ -2,15 +2,15 @@ package com.saucedemo.stepdefinitions;
 
 import com.saucedemo.actor.interactions.Open;
 import com.saucedemo.actor.questions.LoginCredentials;
-import com.saucedemo.actor.questions.Url;
 import com.saucedemo.actor.tasks.Authenticate;
-import com.saucedemo.actor.tasks.Login;
+import com.saucedemo.actor.tasks.InsertInToTheCart;
 import com.saucedemo.data.Credentials;
 import com.saucedemo.ui.pages.SwagLabsLoginPage;
 import io.cucumber.java.en.Given;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.conditions.Check;
+
+import java.util.List;
 
 public class ArrangeSteps {
 
@@ -36,14 +36,45 @@ public class ArrangeSteps {
      * @param actor {@link Actor} instance injected by the {@link ParameterDefinitions#actor(String)} parameter definition.
      * @param expectedStartingPage {@link PageObject} instance injected by the {@link ParameterDefinitions#page(String)} parameter definition.
      */
-    @Given("(A ){actor} is logged in and on the {page} page")
+    @Given("(A ){actor} is/are logged in and on the {page} page")
     public void givenActorIsLoggedInAndOnTheExpectedStartingPage(Actor actor, PageObject expectedStartingPage) {
         Credentials credentials = actor.asksFor(LoginCredentials.of(actor));
 
         actor.wasAbleTo(
                 Open.the(swagLabsLoginPage),
                 Authenticate.using(credentials),
-                Check.whether(!Url.ofTheCurrentlyOpenPage().equals(Url.of(expectedStartingPage))).andIfSo(Open.the(expectedStartingPage))
+                Open.the(expectedStartingPage)
+        );
+    }
+
+    /**
+     * Arrange step for ensuring the {@link Actor} is on the expected starting page.
+     *
+     * @param actor {@link Actor} instance injected by the {@link ParameterDefinitions#actor(String)} parameter definition.
+     * @param expectedStartingPage {@link PageObject} instance injected by the {@link ParameterDefinitions#page(String)} parameter definition.
+     */
+    @Given("{actor} is/are on the {page} page")
+    public void givenTheActorIsOnTheExpectedPage(Actor actor, PageObject expectedStartingPage) {
+        actor.attemptsTo(Open.the(expectedStartingPage));
+    }
+
+    /**
+     * Arrange step for ensuring the {@link Actor} is logged in and has the predefined items already in the cart.
+     * Uses the {@link Authenticate} task to login via the backend and the {@link InsertInToTheCart} task to populate
+     * the cart via the backend to ensure no potential UI issues/changes to those functionalities can prevent the
+     * testing of other functionalities.
+     *
+     * @param actor
+     * @param items
+     */
+    @Given("(A ){actor} is/are logged in and they have the following items in the cart: {items}")
+    public void givenActorIsLoggedInANdTheyHaveTheSpecifiedItemsInTheCart(Actor actor, List<String> items) {
+        Credentials credentials = actor.asksFor(LoginCredentials.of(actor));
+
+        actor.attemptsTo(
+                Open.the(swagLabsLoginPage),
+                Authenticate.using(credentials),
+                InsertInToTheCart.theFollowing(items)
         );
     }
 }
