@@ -20,16 +20,16 @@ Feature: When adding item(s) to the cart
     Then the cart badge should display that the cart contains <expected-num-of-items> items
 
     Examples:
-      | items                                                                                   | expected-num-of-items |
-      | Sauce Labs Bike Light, Sauce Labs Fleece Jacket, Test.allTheThings() T-Shirt            | 3                     |
-      | Sauce Labs Bolt T-Shirt                                                                 | 1                     |
-      | Sauce Labs Backpack, Sauce Labs Onesie, Sauce Labs Bike Light, Sauce Labs Fleece Jacket | 4                     |
+      | items                                                                        | expected-num-of-items |
+      | Sauce Labs Bike Light, Sauce Labs Fleece Jacket, Test.allTheThings() T-Shirt | 3                     |
+      | Sauce Labs Bolt T-Shirt                                                      | 1                     |
+      |                                                                              | 0                     |
 
   @AddToCartTest03
   Scenario Outline: the items should be displayed in the cart
     Given A Standard User is logged in and on the Swag Labs Inventory page
     When they add the following items to the cart: <items>
-    Then the items should be displayed on the Your Cart page
+    Then the items should be displayed on the Swag Labs Cart page
 
     Examples:
       | items                                                                                   |
@@ -39,12 +39,12 @@ Feature: When adding item(s) to the cart
 
   @AddToCartTest04
   Scenario Outline: the number of items displayed on the cart badge should be the same as the number of items in the cart
-    Given A Standard User has the following items in the cart: <items>
+    Given A Standard User is logged in and they have the following items in the cart: <items>
     Then the cart should contain <expected-num-of-items> items
     And the cart badge should display that the cart contains <expected-num-of-items> items
 
     Examples:
       | items                                                                                   | expected-num-of-items |
-      | Sauce Labs Bike Light, Sauce Labs Fleece Jacket, Test.allTheThings() T-Shirt            | 3                     |
-      | Sauce Labs Bolt T-Shirt                                                                 | 1                     |
       | Sauce Labs Backpack, Sauce Labs Onesie, Sauce Labs Bike Light, Sauce Labs Fleece Jacket | 4                     |
+      | Sauce Labs Bolt T-Shirt                                                                 | 1                     |
+      |                                                                                         | 0                     |
