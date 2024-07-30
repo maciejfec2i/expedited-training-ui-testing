@@ -23,6 +23,7 @@ import net.serenitybdd.screenplay.targets.Target;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.saucedemo.data.MemoryKeys.*;
 
@@ -148,5 +149,24 @@ public class AssertSteps {
                 Open.the(swagLabsCartPage),
                 Ensure.that(Number.ofItemsInTheCart()).isEqualTo(expectedNumberOfItems)
         );
+    }
+
+    /**
+     * Step to verify that removed items are no longer present in the cart,
+     *
+     * @param removedItems {@link List} of {@link String} of the item names which were removed the cart. Injected by the
+     *                     {@link ParameterDefinitions#items(String)}.
+     */
+    @Then("the following items should no longer be in the cart: {items}")
+    public void thenTheRemovedItemsShouldNoLongerBeInTheCart(List<String> removedItems) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        List<String> itemsAddedToTheCart = actor.recall(ITEMS_ADDED_TO_CART);
+        List<String> expectedItemsInTheCart = itemsAddedToTheCart.stream().filter(item -> !removedItems.contains(item)).collect(Collectors.toList());
+
+        actor.attemptsTo(Open.the(swagLabsCartPage));
+
+        Collection<String> itemsCurrentlyInTheCart = actor.asksFor(Text.ofEach(InventoryItem.NAME));
+
+        actor.attemptsTo(Ensure.that(itemsCurrentlyInTheCart).containsOnlyElementsFrom(expectedItemsInTheCart));
     }
 }
