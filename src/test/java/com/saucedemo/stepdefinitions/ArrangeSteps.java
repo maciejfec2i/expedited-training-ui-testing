@@ -64,8 +64,9 @@ public class ArrangeSteps {
      * the cart via the backend to ensure no potential UI issues/changes to those functionalities can prevent the
      * testing of other functionalities.
      *
-     * @param actor
-     * @param items
+     * @param actor {@link Actor} instance injected by the {@link ParameterDefinitions#actor(String)} parameter definition.
+     * @param items {@link List} of {@link String} of the item names which are to be added to the cart injected by the
+     *              {@link ParameterDefinitions#items(String)}.
      */
     @Given("(A ){actor} is/are logged in and they have the following items in the cart: {items}")
     public void givenActorIsLoggedInANdTheyHaveTheSpecifiedItemsInTheCart(Actor actor, List<String> items) {

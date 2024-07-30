@@ -1,5 +1,7 @@
 package com.saucedemo.stepdefinitions;
 
+import com.saucedemo.actor.interactions.Open;
+import com.saucedemo.actor.questions.Number;
 import com.saucedemo.actor.questions.Text;
 import com.saucedemo.actor.questions.PageTitleTextContent;
 import com.saucedemo.actor.questions.Url;
@@ -7,19 +9,26 @@ import com.saucedemo.data.ErrorMessage;
 import com.saucedemo.data.SortOrder;
 import com.saucedemo.data.comparators.InventoryItemComparator;
 import com.saucedemo.ui.components.Error;
+import com.saucedemo.ui.components.InventoryItem;
 import com.saucedemo.ui.components.PageTitle;
+import com.saucedemo.ui.components.ShoppingCart;
+import com.saucedemo.ui.pages.SwagLabsCartPage;
 import com.saucedemo.ui.pages.SwagLabsInventoryPage;
 import io.cucumber.java.en.Then;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.targets.Target;
 
 import java.util.Collection;
+import java.util.List;
 
 import static com.saucedemo.data.MemoryKeys.*;
 
 public class AssertSteps {
+
+    private SwagLabsCartPage swagLabsCartPage;
 
     /**
      * Assert step to verify an {@link Actor} was successfully redirected to the expected page after performing an action
@@ -73,5 +82,71 @@ public class AssertSteps {
         Collection<String> itemValuesSortedByComparator = InventoryItemComparator.sortValuesOf(itemValuesBeforeSorting).inOrderOf(order);
 
         actor.attemptsTo(Ensure.that(itemValuesSortedViaUI).containsExactlyElementsFrom(itemValuesSortedByComparator));
+    }
+
+    /**
+     * Assert step to verify that the expected button is displayed on item cards of specified items after Adding or Removing
+     * items from the cart. Takes in a {@link String} instance of the expected button text and uses
+     * the {@link ParameterDefinitions#button(String)} to translate it into a {@link Target} locator, and a {@link String}
+     * of comma separated item names i.e "Sauce Labs Bike Light, Sauce Labs Fleece Jacket", and uses the
+     * {@link ParameterDefinitions#items(String)} to translate it into a {@link List} of {@link String}.
+     *
+     * @param expectedButton {@link Target} locator of the specified button injected by the {@link ParameterDefinitions#button(String)}.
+     * @param items {@link List} of {@link String} of the item names which are to be added to the cart injected by the
+     *              {@link ParameterDefinitions#items(String)}.
+     */
+    @Then("the {button} button should be displayed for the following items: {items}")
+    public void thenTheSpecifiedButtonShouldBeDisplayedForItemsAddedToCart(Target expectedButton, List<String> items) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+
+        for(String item : items) {
+            actor.attemptsTo(Ensure.that(expectedButton.of(item)).isDisplayed());
+        }
+    }
+
+    /**
+     * Assert step to verify that the {@link ShoppingCart#LINK} displays the correct number of items based on the
+     * passed in expected number.
+     *
+     * @param expectedNumber Expected number of items that should be displayed on the {@link ShoppingCart#LINK}.
+     */
+    @Then("the cart badge should display that the cart contains {int} items")
+    public void thenTheCartBadgeShouldDisplayTheCorrectNumberOfItems(int expectedNumber) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+
+        actor.attemptsTo(Ensure.that(Number.ofItemsDisplayedOnTheShoppingCartBadge()).isEqualTo(expectedNumber));
+    }
+
+    /**
+     * Assert step to verify that items added to the cart are displayed on the provided page.
+     *
+     * @param requiredPage {@link PageObject} instance injected by the {@link ParameterDefinitions#page(String)} parameter definition.
+     */
+    @Then("the items should be displayed on the {page} page")
+    public void thenTheItemsAddedToTheCartShouldBeDisplayedOnTheRequiredPage(PageObject requiredPage) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        List<String> expectedItemsInCart = actor.recall(ITEMS_ADDED_TO_CART);
+
+        actor.attemptsTo(Open.the(requiredPage));
+
+        for(String expectedItemInCart : expectedItemsInCart) {
+            actor.attemptsTo(Ensure.that(InventoryItem.cardOf(expectedItemInCart)).isDisplayed());
+        }
+    }
+
+    /**
+     * Assert step to verify that the {@link SwagLabsCartPage} contains the correct number of items based on the
+     * passed in expected number.
+     *
+     * @param expectedNumberOfItems Expected number of items that should be present on the {@link SwagLabsCartPage}.
+     */
+    @Then("the cart should contain {int} items")
+    public void thenTheCartShouldContainTheExpectedNumberOfItems(int expectedNumberOfItems) {
+        Actor actor = OnStage.theActorInTheSpotlight();
+
+        actor.attemptsTo(
+                Open.the(swagLabsCartPage),
+                Ensure.that(Number.ofItemsInTheCart()).isEqualTo(expectedNumberOfItems)
+        );
     }
 }
