@@ -20,10 +20,10 @@ Feature: When adding item(s) to the cart
     Then the cart badge should display that the cart contains <expected-num-of-items> items
 
     Examples:
-      | items                                                                        | expected-num-of-items |
-      | Sauce Labs Bike Light, Sauce Labs Fleece Jacket, Test.allTheThings() T-Shirt | 3                     |
-      | Sauce Labs Bolt T-Shirt                                                      | 1                     |
-      |                                                                              | 0                     |
+      | items                                                                              | expected-num-of-items |
+      | Sauce Labs Bike Light, Sauce Labs Fleece Jacket, Test.allTheThings() T-Shirt (Red) | 3                     |
+      | Sauce Labs Bolt T-Shirt                                                            | 1                     |
+      |                                                                                    | 0                     |
 
   @AddToCartTest03
   Scenario Outline: the items should be displayed in the cart
@@ -33,7 +33,7 @@ Feature: When adding item(s) to the cart
 
     Examples:
       | items                                                                                   |
-      | Sauce Labs Bike Light, Sauce Labs Fleece Jacket, Test.allTheThings() T-Shirt            |
+      | Sauce Labs Bike Light, Sauce Labs Fleece Jacket, Test.allTheThings() T-Shirt (Red)      |
       | Sauce Labs Bolt T-Shirt                                                                 |
       | Sauce Labs Backpack, Sauce Labs Onesie, Sauce Labs Bike Light, Sauce Labs Fleece Jacket |
 
