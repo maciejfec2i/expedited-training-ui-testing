@@ -1,8 +1,8 @@
 package com.saucedemo.actor.questions.text;
 
-import com.saucedemo.actor.questions.Text;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
+import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.targets.Target;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
