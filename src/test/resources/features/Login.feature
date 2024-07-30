@@ -13,7 +13,7 @@ Feature: When logging into the Swag Labs site
     When they attempt to log in to the site
     Then they should see the locked out error message
 
-  @LoginTest03 @LoginTest04
+  @LoginTest03
   Scenario Outline: a user with invalid credentials should see the invalid credentials error message
     Given A <user> was able to open the Swag Labs Login page
     When they attempt to log in to the site
