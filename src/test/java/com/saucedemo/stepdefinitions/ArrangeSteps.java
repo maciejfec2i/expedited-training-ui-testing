@@ -2,8 +2,10 @@ package com.saucedemo.stepdefinitions;
 
 import com.saucedemo.actor.interactions.Open;
 import com.saucedemo.actor.questions.LoginCredentials;
+import com.saucedemo.actor.tasks.AddToCart;
 import com.saucedemo.actor.tasks.Authenticate;
 import com.saucedemo.actor.tasks.InsertInToTheCart;
+import com.saucedemo.actor.tasks.Login;
 import com.saucedemo.data.Credentials;
 import com.saucedemo.ui.pages.SwagLabsLoginPage;
 import io.cucumber.java.en.Given;
@@ -45,7 +47,7 @@ public class ArrangeSteps {
 
         actor.wasAbleTo(
                 Open.the(swagLabsLoginPage),
-                Authenticate.using(credentials),
+                Login.using(credentials),
                 Open.the(expectedStartingPage)
         );
     }
@@ -77,8 +79,8 @@ public class ArrangeSteps {
 
         actor.attemptsTo(
                 Open.the(swagLabsLoginPage),
-                Authenticate.using(credentials),
-                InsertInToTheCart.theFollowing(items),
+                Login.using(credentials),
+                AddToCart.theFollowing(items),
                 RememberThat.theValueOf(ITEMS_ADDED_TO_CART).is(items)
         );
     }
