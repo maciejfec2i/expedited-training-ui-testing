@@ -14,7 +14,7 @@ import java.util.function.Function;
 
 public class BasePageObject extends PageObject {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(CommonPage.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(BasePageObject.class);
 
     private static final Duration GLOBAL_TIMEOUT = Duration.ofSeconds(10);
 
