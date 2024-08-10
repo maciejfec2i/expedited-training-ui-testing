@@ -1,5 +1,6 @@
 package com.saucedemo.stepdefinitions.bad;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -46,5 +47,20 @@ public class BadStepdefs {
     public void error_message_should_have_text(String string) {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
+    }
+
+    @When("I click on {string} button for {string}")
+    public void iClickOnButtonFor(String arg0, String arg1) {
+
+    }
+
+    @And("I am on the {string} page")
+    public void iAmOnThePage(String arg0) {
+
+    }
+
+    @Then("the {string} button should be visible for {string}")
+    public void theButtonShouldBeVisibleFor(String arg0, String arg1) {
+
     }
 }
