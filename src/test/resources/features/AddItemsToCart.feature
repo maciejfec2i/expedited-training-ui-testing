@@ -13,7 +13,7 @@ Feature: When adding item(s) to the cart
       | Sauce Labs Fleece Jacket |
       | Sauce Labs Onesie        |
 
-  @AddToCartTest02
+  @SmokeTest @AddToCartTest02
   Scenario Outline: the cart badge should display the correct number of items
     Given A Standard User is logged in and on the Swag Labs Inventory page
     When they add the following items to the cart: <items>
